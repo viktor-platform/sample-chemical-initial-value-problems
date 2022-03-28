@@ -1,0 +1,14 @@
+version: '1'
+entity_types:
+  ODEFolder:
+    has_designer: false
+    show_properties: false
+  ODE:
+    has_designer: true
+    show_properties: false
+entities:
+- entity_type: ODEFolder
+  properties:
+    name: ODE
+metadata:
+  background_image: 'ODE_interface.png'

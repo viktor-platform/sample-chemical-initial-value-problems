@@ -1,0 +1,4 @@
+# viktor==12.10.0
+pandas
+scipy
+plotly
