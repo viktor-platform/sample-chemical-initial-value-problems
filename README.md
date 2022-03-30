@@ -39,7 +39,7 @@ constants for those equations, with chemistry having the added complexity that m
 can influence a species. Luckily VIKTOR has table inputs that make this bulky operation as visually
 digestible as it would be in Excel.
 
-![](manifest/pictures/Input structure.PNG)
+![](manifest/pictures/Input_structure.PNG)
 
 In the reaction field all reactions can be put in, and with the names a user gives to the
 species themselves, so no working with Ca and Cb, which can quickly become confusing. 
