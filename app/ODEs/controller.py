@@ -55,11 +55,6 @@ class ODEController(ViktorController):
 
     @DataView('Results numbers', duration_guess=1) #get the changes at all time points for all species
     def get_value_changes(self, params, **kwargs):
-        # i = 0
-        # names = []
-        # for species in params.species_array.species:
-        #     names.append(species['name'])
-        #     i += 1
         names = [species['name'] for species in params.species_array.species]
 
         for replacement in params.plot_names.table:
@@ -86,9 +81,6 @@ class ODEController(ViktorController):
         ODE_result = self.executeODE(params)
         fig = go.Figure()
 
-        # names = []
-        # for element in params.species_array.species:
-        #     names.append(element['name'])
         names = [species['name'] for species in params.species_array.species]
 
         for replacement in params.plot_names.table:

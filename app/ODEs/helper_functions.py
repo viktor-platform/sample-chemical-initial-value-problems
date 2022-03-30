@@ -16,9 +16,6 @@ SOFTWARE.
 """
 
 def get_variable_list(munch, keyword): #these 2 functions are to make the data handleable
-    # result = []
-    # for element in munch:
-    #     result.append(element[keyword])
     result = [element[keyword] for element in munch]
     return result
 
