@@ -29,15 +29,17 @@ from viktor.views import PlotlyView
 from .helper_functions import ode_func
 from .helper_functions import get_variable_dict
 from .helper_functions import get_variable_list
-from .parametrization import odeParametrization
+from .parametrization import ODEParametrization
 
 
-class odeController(ViktorController):
+class ODEController(ViktorController):
+    """Responsible for visualization and calculation"""
+
     label = 'ODE'
-    parametrization = odeParametrization
+    parametrization = ODEParametrization
 
     def execute_ode(self,params):
-        # function for solving the differential profiles based on user input
+        """function for solving the differential profiles based on user input"""
         time = [params.time.begin, params.time.end]
         timespan = np.linspace(params.time.begin, params.time.end, params.time.resolution)
 
@@ -57,8 +59,8 @@ class odeController(ViktorController):
 
 
     @DataView('Results numbers', duration_guess=1)
-    #get the changes at all time points for all species
     def get_value_changes(self, params, **kwargs):
+        """get the changes at all time points for all species"""
         names = [species['name'] for species in params.species_array.species]
 
         for replacement in params.plot_names.table:
@@ -81,9 +83,9 @@ class odeController(ViktorController):
 
 
     @PlotlyView("Plotly view", duration_guess=5)
-    #for viualizing all differential profiles in a plot
     def get_progression_plot(self, params, **kwargs):
-        ODE_result = self.execute_ode(params)
+        """for viualizing all differential profiles in a plot"""
+        ode_result = self.execute_ode(params)
         fig = go.Figure()
 
         names = [species['name'] for species in params.species_array.species]
@@ -96,8 +98,8 @@ class odeController(ViktorController):
                 i+=1
 
         i = 0
-        for profile in ODE_result.y:
-            fig.add_trace(go.Scatter(x=ODE_result.t, y=profile, name=names[i]))
+        for profile in ode_result.y:
+            fig.add_trace(go.Scatter(x=ode_result.t, y=profile, name=names[i]))
             i += 1
 
         return PlotlyResult(fig.to_json())

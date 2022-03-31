@@ -18,10 +18,10 @@ SOFTWARE.
 from viktor.core import ViktorController
 
 
-class ode_folderController(ViktorController):
-    # For showing the instances of the app on the dashboard
+class ODEFolderController(ViktorController):
+    """For showing the instances of the app on the dashboard"""
     label = 'ODE Folder'
-    children = ['ode'] #add all entities
+    children = ['ODE'] #add all entities
     show_children_as = 'Cards'  # or 'Table'
 
     viktor_convert_entity_field = True
