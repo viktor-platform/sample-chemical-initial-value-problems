@@ -30,23 +30,43 @@ def get_variable_dict(munch, keyword): #some things need to be findable by order
     return result
 
 def react_to_arithmetic(string, react_num, concs, constants, new_names):
-  pattern = re.compile(r'[-+*]*[^-+*]+')
-  matches = pattern.finditer(string)
-  constant = constants[react_num]['rate_constant']
-  total = constant
-  for match in matches:
-    value = match.group()
-    if value == '0':
-      total = 0
-    elif value[0] == '*':
-      total *= concs[new_names[value[1:]]]
-    else:
-      total *= concs[new_names[value]]
-  return total
+    pattern = re.compile(r'[-+*]*[^-+*]+')
+    matches = pattern.finditer(string)
+    constant = constants[react_num]['rate_constant']
+    total = constant
+    for match in matches:
+        value = match.group()
+        if value == '0':
+            total = 0
+        elif value[0] == '*':
+            total *= concs[new_names[value[1:]]]
+        else:
+            total *= concs[new_names[value]]
+    return total
 
 def matrix_to_arithmetic(string):
-  total = eval(string)
-  return total
+    pattern = re.compile(r'[-+*]?[^-+*]+(-\d{2})?')
+    matches = pattern.finditer(string)
+    total = 0
+    for match in matches:
+        value = match.group()
+        if value[0] == '*':
+            if last_operation == '-':
+                total += last_value
+                total -= last_value * float(value[1:])
+            else:
+                total -= last_value
+                total += last_value * float(value[1:])
+        elif value[0] == '-':
+            last_operation, last_value = '-', float(value[1:])
+            total -= last_value
+        elif value[0] == '+':
+            last_operation, last_value = '+', float(value[1:])
+            total += last_value
+        else:
+            last_operation, last_value = '+', float(value)
+            total += last_value
+    return total
 
 def ODEfunc(t, concs, constants, reacts, matrices, names): #lots of string replacement to get usable python code
     reacts = {f'r{i + 1}': react_to_arithmetic(reacts[i], i, concs, constants, names) for i in range(len(reacts))}
