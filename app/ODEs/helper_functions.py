@@ -16,12 +16,14 @@ SOFTWARE.
 """
 import re
 
-def get_variable_list(munch, keyword): #these 2 functions are to make the data handleable
+def get_variable_list(munch, keyword):
+    #these 2 functions are to make the data handleable
     result = [element[keyword] for element in munch]
     return result
 
 
-def get_variable_dict(munch, keyword): #some things need to be findable by order of input
+def get_variable_dict(munch, keyword):
+    #some things need to be findable by order of input, so an index is added
     i = 0
     result = []
     for element in munch:
@@ -30,6 +32,7 @@ def get_variable_dict(munch, keyword): #some things need to be findable by order
     return result
 
 def react_to_arithmetic(string, react_num, concs, constants, new_names):
+    #converts the reactions to their numerical values
     pattern = re.compile(r'[-+*]*[^-+*]+')
     matches = pattern.finditer(string)
     constant = constants[react_num]['rate_constant']
@@ -45,6 +48,7 @@ def react_to_arithmetic(string, react_num, concs, constants, new_names):
     return total
 
 def matrix_to_arithmetic(string):
+    #performs the arithmetic on the mathematical string
     pattern = re.compile(r'[-+*]?[^-+*]+(-\d{2})?')
     matches = pattern.finditer(string)
     total = 0
@@ -68,7 +72,8 @@ def matrix_to_arithmetic(string):
             total += last_value
     return total
 
-def ODEfunc(t, concs, constants, reacts, matrices, names): #lots of string replacement to get usable python code
+def ode_func(time, concs, constants, reacts, matrices, names):
+    #lots of string replacement to get usable python code
     reacts = {f'r{i + 1}': react_to_arithmetic(reacts[i], i, concs, constants, names) for i in range(len(reacts))}
     matrix_replace = []
     for matrix in matrices:

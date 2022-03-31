@@ -1,14 +1,14 @@
 version: '1'
 entity_types:
-  ODEFolder:
+  ode_folder:
     has_designer: false
     show_properties: false
-  ODE:
+  ode:
     has_designer: true
     show_properties: false
 entities:
-- entity_type: ODEFolder
+- entity_type: ode_folder
   properties:
-    name: ODE
+    name: ode
 metadata:
   background_image: 'ODE_interface.png'

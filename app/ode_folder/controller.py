@@ -15,5 +15,13 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 SOFTWARE.
 """
 
-from .ode_folder.controller import ode_folderController
-from .odes.controller import odeController
+from viktor.core import ViktorController
+
+
+class ode_folderController(ViktorController):
+    # For showing the instances of the app on the dashboard
+    label = 'ODE Folder'
+    children = ['ode'] #add all entities
+    show_children_as = 'Cards'  # or 'Table'
+
+    viktor_convert_entity_field = True

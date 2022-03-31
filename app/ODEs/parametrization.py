@@ -24,7 +24,7 @@ from viktor.parametrization import TextField
 from viktor.parametrization import ToggleButton
 
 
-class ODEParametrization(Parametrization):
+class odeParametrization(Parametrization):
     section_reaction_array = Section('Reaction data')
     section_reaction_array.reactions = Table('reaction data')
     section_reaction_array.reactions.reaction = TextField('Reaction')

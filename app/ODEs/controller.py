@@ -26,17 +26,18 @@ from viktor.views import DataView
 from viktor.views import PlotlyResult
 from viktor.views import PlotlyView
 
-from .helper_functions import ODEfunc
+from .helper_functions import ode_func
 from .helper_functions import get_variable_dict
 from .helper_functions import get_variable_list
-from .parametrization import ODEParametrization
+from .parametrization import odeParametrization
 
 
-class ODEController(ViktorController):
+class odeController(ViktorController):
     label = 'ODE'
-    parametrization = ODEParametrization
+    parametrization = odeParametrization
 
-    def executeODE(self,params): # function for solving the differential profiles based on user input
+    def execute_ode(self,params):
+        # function for solving the differential profiles based on user input
         time = [params.time.begin, params.time.end]
         timespan = np.linspace(params.time.begin, params.time.end, params.time.resolution)
 
@@ -48,14 +49,15 @@ class ODEController(ViktorController):
 
         names = {name['name']: name['index'] for name in names}
 
-        sol = solve_ivp(ODEfunc, time , initial_concs, t_eval=timespan, args=[constants,
+        sol = solve_ivp(ode_func, time , initial_concs, t_eval=timespan, args=[constants,
                                                                                 reactions,
                                                                                 applied_reactions,
                                                                                 names])
         return sol
 
 
-    @DataView('Results numbers', duration_guess=1) #get the changes at all time points for all species
+    @DataView('Results numbers', duration_guess=1)
+    #get the changes at all time points for all species
     def get_value_changes(self, params, **kwargs):
         names = [species['name'] for species in params.species_array.species]
 
@@ -66,10 +68,10 @@ class ODEController(ViktorController):
                     names[i] = replacement.to
                 i+=1
 
-        ODE_result = self.executeODE(params)
+        ode_result = self.execute_ode(params)
         runs = []
         i = 0
-        for profile in ODE_result.y:
+        for profile in ode_result.y:
             runs.append(DataGroup(DataItem(label=names[i], value=list(profile))))
             i+= 1
 
@@ -78,9 +80,10 @@ class ODEController(ViktorController):
         return DataResult(result)
 
 
-    @PlotlyView("Plotly view", duration_guess=5) #for viualizing all differential profiles in a plot
+    @PlotlyView("Plotly view", duration_guess=5)
+    #for viualizing all differential profiles in a plot
     def get_progression_plot(self, params, **kwargs):
-        ODE_result = self.executeODE(params)
+        ODE_result = self.execute_ode(params)
         fig = go.Figure()
 
         names = [species['name'] for species in params.species_array.species]
