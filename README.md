@@ -12,8 +12,7 @@ and one to define the species (notation = Name: A/chlorine, Species concentratio
 
 There are also input fields to define reaction time, and plot resolution. Since the program finds 
 and matches strings it can be easy to use abbreviations for the reaction input table. There is one last table
-where these abbreviations can be subsituted with their full names for the plot legend. Since the program matches strings
-input names should not contain other input names, for example species 1: catalyst, and species 2: active catalyst.
+where these abbreviations can be subsituted with their full names for the plot legend. 
 
 ## Using the functionality
 There are two ways in which you can use the functionality: 
@@ -27,7 +26,7 @@ This is a snippet of the functionality’s code from app/ODE/controller.py
 ![](manifest/pictures/code_snippet.PNG)
 
 Here the table inputs conveniently get made into executable differentials, even though the inputs are strings.
-The program shows that you don't need to be a programmer to solve initial value problems when the
+The program shows that you don't need to be a programmer to solve initial value problems with python when the
 right infrastructure is in place.
 
 **Apply for a [demo account](https://www.viktor.ai/demo-environment) to get access to this and all other VIKTOR sample applications.**

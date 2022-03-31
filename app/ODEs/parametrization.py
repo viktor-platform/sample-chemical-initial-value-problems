@@ -28,7 +28,7 @@ class ODEParametrization(Parametrization):
     section_reaction_array = Section('Reaction data')
     section_reaction_array.reactions = Table('reaction data')
     section_reaction_array.reactions.reaction = TextField('Reaction')
-    section_reaction_array.reactions.rate_constant = TextField('Rate constant')
+    section_reaction_array.reactions.rate_constant = NumberField('Rate constant')
 
     species_array = Section('Species data')
     species_array.species = Table('Species data')

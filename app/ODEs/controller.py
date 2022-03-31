@@ -46,6 +46,8 @@ class ODEController(ViktorController):
         names = get_variable_dict(params.species_array.species, 'name')
         constants = get_variable_dict(params.section_reaction_array.reactions, 'rate_constant')
 
+        names = {name['name']: name['index'] for name in names}
+
         sol = solve_ivp(ODEfunc, time , initial_concs, t_eval=timespan, args=[constants,
                                                                                 reactions,
                                                                                 applied_reactions,
