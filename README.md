@@ -6,9 +6,9 @@ Sample app for visualizing profiles caused by different differential equations
 In this app simulating profiles of different differentials is made easy. The applications was made for predicting
 chemical reaction profiles, but more applications where initial value problems need to be solved could qualify.
 
-The app contains two tables, one to define the reactions (notation = Reaction: k1\*A\*B/k2\*B\*clorine, Rate constant: 0.1/0.542)
+The app contains two tables, one to define the reactions (notation = Reaction: k1\*A\*B/k2\*B\*clorine\*\*2, Rate constant: 0.1/0.542)
 and one to define the species (notation = Name: A/chlorine, Species concentration: 1/3.56, Applicable reactions:
--r1+r2/r4-r3+r6**2).
+-r1+r2/r4-r3+r6\*3).
 
 There are also input fields to define reaction time, and plot resolution. Since the program finds 
 and matches strings it can be easy to use abbreviations for the reaction input table. There is one last table
@@ -40,12 +40,16 @@ digestible as it would be in Excel.
 
 ![](manifest/pictures/Input_structure.PNG)
 
-In the reaction field all reactions can be put in, and with the names a user gives to the
-species themselves, so no working with Ca and Cb, which can quickly become confusing. 
-Then all constants k1-kx get a user defined value.
-All that is left then is the species table where all participating species are filled in.
-All species get an initial concentration. Finally, a user can input the reactions a species
-undergoes, and whether it reacts or is formed. yielding a graph of their predicted reaction.
+In the reaction field all reactions can be put in 
+(supports multiplication (\*), and powers(\*\*)),
+and with the names a user gives to the species themselves, 
+so no working with Ca and Cb, which can quickly become confusing. 
+Then all constants k1-kx get a user defined value. All that is left
+then is the species table where all participating species are filled in.
+All species get an initial concentration. Finally, a user can input the
+reactions a species undergoes 
+(supports addition (+), subtraction (-), and multiplication (*)),
+and whether it reacts or is formed. yielding a graph of their predicted reaction.
 
 
 ![](manifest/ODE_interface.PNG)
