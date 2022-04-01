@@ -15,5 +15,5 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 SOFTWARE.
 """
 
-from .ODEFolder.controller import ODEFolderController
-from .ODEs.controller import ODEController
+from .odefolder.controller import ODEFolderController
+from .odes.controller import ODEController
