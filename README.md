@@ -1,5 +1,6 @@
 ![](https://img.shields.io/badge/SDK-v12.10.0)
 
+![](reaction_prediction_gif.gif)
 # Differential solver
 Sample app for visualizing profiles caused by different differential equations
 
