@@ -53,4 +53,4 @@ reactions a species undergoes
 and whether it reacts or is formed. yielding a graph of their predicted reaction.
 
 
-![](manifest/ODE_interface.PNG)
+![](manifest/pictures/ODE_interface.PNG)

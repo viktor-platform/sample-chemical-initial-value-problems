@@ -11,4 +11,4 @@ entities:
   properties:
     name: ODE
 metadata:
-  background_image: 'ODE_interface.png'
+  background_image: 'ODE_background.jpg'
