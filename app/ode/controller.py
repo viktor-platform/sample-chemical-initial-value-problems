@@ -38,7 +38,7 @@ class ODEController(ViktorController):
     label = 'ODE'
     parametrization = ODEParametrization
 
-    def execute_ode(self,params):
+    def execute_ode(self, params):
         """function for solving the differential profiles based on user input"""
         time = [params.time.begin, params.time.end]
         timespan = np.linspace(params.time.begin, params.time.end, params.time.resolution)
@@ -51,12 +51,11 @@ class ODEController(ViktorController):
 
         names = {name['name']: name['index'] for name in names}
 
-        sol = solve_ivp(ode_func, time , initial_concs, t_eval=timespan, args=[constants,
-                                                                                reactions,
-                                                                                applied_reactions,
-                                                                                names])
+        sol = solve_ivp(ode_func, time, initial_concs, t_eval=timespan, args=[constants,
+                                                                              reactions,
+                                                                              applied_reactions,
+                                                                              names])
         return sol
-
 
     @DataView('Results numbers', duration_guess=1)
     def get_value_changes(self, params, **kwargs):
@@ -68,23 +67,22 @@ class ODEController(ViktorController):
             for element in names:
                 if element == replacement.original:
                     names[i] = replacement.to
-                i+=1
+                i += 1
 
         ode_result = self.execute_ode(params)
         runs = []
         i = 0
         for profile in ode_result.y:
             runs.append(DataGroup(DataItem(label=names[i], value=list(profile))))
-            i+= 1
+            i += 1
 
         result = DataGroup.from_data_groups(runs)
 
         return DataResult(result)
 
-
     @PlotlyView("Plotly view", duration_guess=5)
     def get_progression_plot(self, params, **kwargs):
-        """for viualizing all differential profiles in a plot"""
+        """for visualizing all differential profiles in a plot"""
         ode_result = self.execute_ode(params)
         fig = go.Figure()
 
@@ -95,7 +93,7 @@ class ODEController(ViktorController):
             for element in names:
                 if element == replacement.original:
                     names[i] = replacement.to
-                i+=1
+                i += 1
 
         i = 0
         for profile in ode_result.y:
