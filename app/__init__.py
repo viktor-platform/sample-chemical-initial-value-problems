@@ -15,5 +15,11 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 SOFTWARE.
 """
 
-from .odes_folder.controller import ODEFolderController
-from .ode.controller import ODEController
+from .odes_folder.controller import ODEFolderController as ODEFolder
+from .ode.controller import ODEController as ODE
+
+from viktor import InitialEntity
+
+initial_entities = [
+    InitialEntity('ODEFolder', name='ODE')
+]
