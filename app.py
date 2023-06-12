@@ -26,10 +26,42 @@ from viktor.views import DataView
 from viktor.views import PlotlyResult
 from viktor.views import PlotlyView
 
-from .helper_functions import ode_func
-from .helper_functions import get_variable_dict
-from .helper_functions import get_variable_list
-from .parametrization import ODEParametrization
+from helper_functions import ode_func
+from helper_functions import get_variable_dict
+from helper_functions import get_variable_list
+
+from viktor.parametrization import Lookup
+from viktor.parametrization import NumberField
+from viktor.parametrization import Parametrization
+from viktor.parametrization import Section
+from viktor.parametrization import Table
+from viktor.parametrization import TextField
+from viktor.parametrization import ToggleButton
+
+
+class ODEParametrization(Parametrization):
+    """For providing the input fields to users"""
+    section_reaction_array = Section('Reaction data')
+    section_reaction_array.reactions = Table('reaction data')
+    section_reaction_array.reactions.reaction = TextField('Reaction')
+    section_reaction_array.reactions.rate_constant = NumberField('Rate constant')
+
+    species_array = Section('Species data')
+    species_array.species = Table('Species data')
+    species_array.species.name = TextField('Species name')
+    species_array.species.concentration = NumberField('Species Concentration')
+    species_array.species.matrix = TextField('Applicable reactions')
+
+    time = Section('Time')
+    time.begin = NumberField('Begin', default=0)
+    time.end = NumberField('End', default=10)
+    time.resolution = NumberField('Resolution', default= 10)
+
+    plot_names = Section('Plot names')
+    plot_names.toggle = ToggleButton('Change plot names?', default=False)
+    plot_names.table = Table('Translations', visible=Lookup('plot_names.toggle'))
+    plot_names.table.original = TextField('from')
+    plot_names.table.to = TextField('to')
 
 
 class ODEController(ViktorController):
