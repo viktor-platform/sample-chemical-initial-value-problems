@@ -14,7 +14,7 @@ SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-
+from pathlib import Path
 import numpy as np
 import plotly.graph_objects as go
 from scipy.integrate import solve_ivp
@@ -25,6 +25,8 @@ from viktor.views import DataResult
 from viktor.views import DataView
 from viktor.views import PlotlyResult
 from viktor.views import PlotlyView
+from viktor.views import WebResult
+from viktor.views import WebView
 
 from helper_functions import ode_func
 from helper_functions import get_variable_dict
@@ -133,3 +135,11 @@ class ODEController(ViktorController):
             i += 1
 
         return PlotlyResult(fig.to_json())
+    
+    @WebView("What's next?", duration_guess=1)
+    def whats_next(self, params, **kwargs):
+        """Initiates the process of rendering the "What's next" tab."""
+        html_path = Path(__file__).parent / "next_step.html"
+        with html_path.open(encoding="utf-8") as _file:
+            html_string = _file.read()
+        return WebResult(html=html_string)
