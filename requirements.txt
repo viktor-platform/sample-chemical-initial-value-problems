@@ -1,5 +1,5 @@
 viktor==14.0.0
-scipy==1.10.1
-plotly==5.14.1
+scipy
+plotly
  
 
